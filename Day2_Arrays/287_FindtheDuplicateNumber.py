@@ -24,9 +24,31 @@ How can we prove that at least one duplicate number must exist in nums?
 Can you solve the problem in linear runtime complexity?
 '''
 
-# The approach uses Floyd's Tortoise and Hare (Cycle Detection) algorithm to find the duplicate number in the list 
-# by first detecting a cycle through slow and fast pointers, then finding the cycle's entry point which corresponds to the duplicate. 
-# Once a cycle is detected, resetting one pointer to the start and moving both pointers one step at a time identifies the duplicate number when they meet again.
+# Approach 1: 
+# Sort the array. After that, if there is any duplicate number they will be adjacent.
+# So we simply have to check if nums[i]==nums[i+1] and if it is true,nums[i] is the duplicate number.
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        nums.sort()
+        for i in range(len(nums)-1):
+            if nums[i]==nums[i+1]:
+                return nums[i]
+
+# Approach 2:
+# Approach: Take a frequency array of size N+1 and initialize it to 0. 
+# Now traverse through the array and if the frequency of the element is 0 increase it by 1, else if the frequency is not 0 then that element is the required answer.
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        freq=[0]*(len(nums))
+        for num in nums:
+            if freq[num]==0:
+                freq[num]+=1
+            else:
+                return num
+
+# Approach 3: Floyd's Tortoise and Hare (Cycle Detection) algorithm
+# First detect a cycle through slow and fast pointers, then find the cycle's entry point which corresponds to the duplicate. 
+# Once a cycle is detected, reset one pointer to the start and move both pointers one step at a time identifies the duplicate number when they meet again.
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
         slow=fast=nums[0]
