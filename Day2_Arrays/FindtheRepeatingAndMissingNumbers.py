@@ -31,3 +31,36 @@ class Solution:
         x=(n*(n+1)//2)-((summation)-res[0])
         res.append(x)
         return res
+
+# Approach 2:
+
+# S = the summation of all the elements in the given array.
+# Summation of the first N numbers Sn = (N*(N+1))/2
+# Therefore, S - Sn = X - Y…………………equation 1
+
+# S2 = the summation of squares of all the elements in the given array.
+# Now, we know the summation of squares of the first N numbers S2n = (N*(N+1)*(2N+1))/6
+# Therefore, S2-S2n = X2-Y2...................equation 2
+
+# X+Y = (S2 - S2n) / (X-Y)
+
+class Solution:
+    # @param A : tuple of integers
+    # @return a list of integers
+    def repeatedNumber(self, A):
+        n=len(A)
+        
+        S=sum(A)
+        Sn=n*(n+1)//2
+        val1=Sn-S
+        
+        S2=0
+        Sn2=(n*(n+1)*(2*n+1))//6
+        for num in A:
+            S2+=num*num
+        val2=Sn2-S2
+
+        val2 = val2 // val1
+        X=(val2+val1)//2
+        Y=X-val1
+        return [Y,X]
