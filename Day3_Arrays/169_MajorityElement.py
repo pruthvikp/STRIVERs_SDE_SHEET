@@ -18,9 +18,8 @@ Follow-up: Could you solve the problem in linear time and in O(1) space?
 '''
 
 # Approach:
-
 class Solution:
-    def majorityElement(self, nums: List[int]) -> int:
+    def majorityElement(self, nums):
         if len(nums)==1:
             return nums[0]
         d={}
